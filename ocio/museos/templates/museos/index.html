@@ -1,0 +1,32 @@
+<html>
+	<head>
+    	<title>MuseosMadrid</title>
+	</head>
+	<body>
+		<div>		
+			<h1>Tu APP MuseosMadrid</h1>				
+		</div>
+		
+		<div>		
+			<h5>
+				<p>{{logged}} <a href={{link}}?next=/>{{name_link}}</a></p>
+			</h5>				
+		</div>
+						
+		<div>    	
+			<h3>Museos más comentados</h3>
+				{% for museo in lista_museos %}
+					<p><a href={{museo.enlace}}>{{museo.nombre}}</a></p>
+					<p>{{museo.direccion}}</p>
+				{% endfor %}				
+		</div>
+		<div>    	
+			<h3>Museos preferidos por otros usuarios</h3>
+				<p>Aquí los museos favoritos de otra gente</p>
+		</div>
+	</body>
+</html>
+
+
+       
+    
