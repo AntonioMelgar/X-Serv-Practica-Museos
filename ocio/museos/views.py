@@ -20,9 +20,18 @@ def mostrar_principal(request):
 	if request.method == "GET":
 		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
 	
-	else:
-		respuesta = HttpResponse('Auún no esta ready')	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')	
 
-	return respuesta	
+	return respuesta
+
+def mostrar_museos(request):
+	return HttpResponse('Aqui mostramos todos los museos')
+
+def mostrar_ayuda(request):
+	return HttpResponse('Aqui mostramos toda la ayuda posible')	
 
 

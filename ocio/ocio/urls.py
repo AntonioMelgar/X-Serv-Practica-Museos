@@ -20,6 +20,8 @@ from django.contrib.auth.views import logout, login
 urlpatterns = [
 	#url(r'^museo/(\d+)$', 'museos.views.mostrar_app_museo'), 
 	url(r'^$', 'museos.views.mostrar_principal'),
+	url(r'^museos', 'museos.views.mostrar_museos'),
+	url(r'^about', 'museos.views.mostrar_ayuda'),
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^logout', logout), ##
 	url(r'^login', login),

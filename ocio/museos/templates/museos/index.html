@@ -16,14 +16,28 @@
 		<div>    	
 			<h3>Museos más comentados</h3>
 				{% for museo in lista_museos %}
-					<p><a href={{museo.enlace}}>{{museo.nombre}}</a></p>
-					<p>{{museo.direccion}}</p>
+					<h4><a href={{museo.enlace}}>{{museo.nombre}}</a></h4>
+					<h6>{{museo.direccion}}</h6>
 				{% endfor %}				
 		</div>
+
+		<div>	    
+			<form action="" method="POST">
+  				<input type="submit" value="Todos" name="Todos">
+			</form> 		
+		</div>
+
 		<div>    	
 			<h3>Museos preferidos por otros usuarios</h3>
 				<p>Aquí los museos favoritos de otra gente</p>
 		</div>
+
+		<div>	    
+			<form action="" method="POST">
+  				<input type="submit" value="About" name="About">
+			</form> 		
+		</div>			
+
 	</body>
 </html>
 
