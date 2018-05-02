@@ -28,10 +28,20 @@ def mostrar_principal(request):
 
 	return respuesta
 
+@csrf_exempt
 def mostrar_museos(request):
-	return HttpResponse('Aqui mostramos todos los museos')
+	if request.method == "GET":
+		lista_museos = Museo.objects.all()
+		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos})
+	elif request.method == "POST":
+		distrito = request.POST['Distrito']
+		lista_museos = Museo.objects.filter(distrito=distrito)
+		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos})
+
+	return respuesta 
 
 def mostrar_ayuda(request):
-	return HttpResponse('Aqui mostramos toda la ayuda posible')	
+	respuesta = HttpResponse('Aqui mostramos la ayuda')
+	return respuesta
 
 

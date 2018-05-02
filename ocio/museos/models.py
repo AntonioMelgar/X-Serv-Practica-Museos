@@ -7,6 +7,7 @@ class Museo(models.Model):
 	horario = models.CharField(max_length=20000)
 	descripcion = models.CharField(max_length=20000)
 	direccion = models.CharField(max_length=20000)
+	distrito = models.CharField(max_length=256)
 	accesibilidad = models.IntegerField()
 	enlace = models.CharField(max_length=20000)
 	numero_comentarios = models.IntegerField()
