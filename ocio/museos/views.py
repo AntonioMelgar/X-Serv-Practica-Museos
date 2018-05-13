@@ -5,11 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Museo, Usuario
 from lxml import etree
 
- 
 # Create your views here.
 
 def extraer_elemento(dic, elemento):
-	
 	try:
 		elemento = dic[elemento]
 	
@@ -17,8 +15,6 @@ def extraer_elemento(dic, elemento):
 		elemento = ""
 
 	return elemento
-
-	
 
 def guardar_datos(dic):
 	dicc_datos = {}
@@ -32,11 +28,9 @@ def guardar_datos(dic):
 	g.save()
 		
 	return None
-	
 
-def parser():
-	
-	doc = etree.parse('museos/201132-0-museos.xml')
+def parsear(doc):
+
 	contenidos = doc.getroot()
 	
 	for k in range(1, len(contenidos)):
@@ -73,6 +67,12 @@ def parser():
 		guardar_datos(dic) 
 		
 	return None
+
+def crear_database():	
+	doc = etree.parse('museos/201132-0-museos.xml')
+	parsear(doc)
+
+	return None
 		
 	
 @csrf_exempt
@@ -84,9 +84,15 @@ def mostrar_principal(request):
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'		
-
-	lista_museos = Museo.objects.order_by('-NUMERO_COMENTARIOS')[0:5]
+		link = 'login'	
+	
+	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").order_by('-NUMERO_COMENTARIOS')
+	if len(lista_museos) < 5:
+		lista_museos = lista_museos[0:len(lista_museos)]
+		
+	else:
+		lista_museos = lista_museos[0:5]
+	
 	if request.method == "GET":
 		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
 	
@@ -94,24 +100,184 @@ def mostrar_principal(request):
 		if 'Todos' in request.POST:
    			respuesta = HttpResponseRedirect('/museos')
 		elif 'About' in request.POST:
-			respuesta = HttpResponseRedirect('/about')		
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Accesibles' in request.POST:
+			respuesta = HttpResponseRedirect('/accesibles')
+		elif 'Next' in request.POST: 
+			respuesta = HttpResponseRedirect('/1')
 		elif 'Cargar' in request.POST: ######
-			parser()	
+			crear_database()	
+			respuesta = HttpResponseRedirect('/')
+
+	return respuesta
+
+
+@csrf_exempt
+def mostrar_principal_next(request, numero):
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'	
+	
+	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").order_by('-NUMERO_COMENTARIOS')
+	volver = False
+	if len(lista_museos) <= 5:
+		lista_museos = lista_museos[0:len(lista_museos)]	
+	elif len(lista_museos) - int(numero)*5 < 5:
+		lista_museos = lista_museos[int(numero)*5:len(lista_museos)]
+		volver = True
+	else:
+		lista_museos = lista_museos[int(numero)*5:(int(numero)*5+5)]
+	
+
+		
+	if request.method == "GET":
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Accesibles' in request.POST:
+			respuesta = HttpResponseRedirect('/accesibles')
+		elif 'Next' in request.POST:
+			if volver:
+				respuesta = HttpResponseRedirect('/')
+			else: 
+				respuesta = HttpResponseRedirect('/' + str(int(numero)+1))
+		elif 'Cargar' in request.POST: ######
+			crear_database()	
 			respuesta = HttpResponseRedirect('/')
 
 	return respuesta
 
 @csrf_exempt
+def mostrar_principal_accesibles(request):
+	print('acc')
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'		
+
+	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").filter(ACCESIBILIDAD = '1').order_by('-NUMERO_COMENTARIOS')
+	if len(lista_museos) < 5:
+		lista_museos = lista_museos[0:len(lista_museos)]
+		
+	else:
+		lista_museos = lista_museos[0:5] 
+	
+	if request.method == "GET":
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Accesibles' in request.POST:
+			respuesta = HttpResponseRedirect('/')
+		elif 'Next' in request.POST: 
+			respuesta = HttpResponseRedirect('accesibles/1')
+		elif 'Cargar' in request.POST: ######
+			crear_database()	
+			respuesta = HttpResponseRedirect('/')
+
+	return respuesta
+
+
+@csrf_exempt
+def mostrar_principal_accesibles_next(request, numero):
+	print('acc_next')
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'		
+
+	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").filter(ACCESIBILIDAD = '1').order_by('-NUMERO_COMENTARIOS')
+	volver = False
+	if len(lista_museos) <= 5:
+		lista_museos = lista_museos[0:len(lista_museos)]	
+	elif len(lista_museos) - int(numero)*5 < 5:
+		lista_museos = lista_museos[int(numero)*5:len(lista_museos)]
+		volver = True
+	else:
+		lista_museos = lista_museos[int(numero)*5:(int(numero)*5+5)]
+	
+	if request.method == "GET":
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Accesibles' in request.POST:
+			respuesta = HttpResponseRedirect('/')
+		elif 'Next' in request.POST:
+			if volver:
+				respuesta = HttpResponseRedirect('/accesibles')
+			else: 
+				respuesta = HttpResponseRedirect('accesibles/' + str(int(numero)+1))
+		elif 'Cargar' in request.POST: ######
+			crear_database()	
+			respuesta = HttpResponseRedirect('/')
+	
+	return respuesta
+
+@csrf_exempt
 def mostrar_museos(request):
+
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'
+	
 	if request.method == "GET":
 		lista_museos = Museo.objects.all()
-		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos})
+		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
 	elif request.method == "POST":
-		distrito = request.POST['Distrito']
+		distrito = request.POST['Distrito'].upper()
 		lista_museos = Museo.objects.filter(DISTRITO=distrito)
-		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos})
+		respuesta = render(request, 'museos/museos.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+
+	return respuesta
+
+
+
+def mostrar_app_museo(request, identificador):
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'
+	
+	if request.method == "GET":
+		museo = Museo.objects.get(id=int(identificador))
+		respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link}) 
 
 	return respuesta 
+
+
 
 def mostrar_ayuda(request):
 	respuesta = HttpResponse('Aqui mostramos la ayuda')

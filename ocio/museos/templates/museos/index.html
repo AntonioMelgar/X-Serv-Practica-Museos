@@ -1,29 +1,36 @@
 {% extends "museos/base.html" %}
  
-{% block title %}Tu App MuseosMadrid{% endblock %}
+{% block title %}Museos Madrid{% endblock %}
 
-{% block subtitle_1 %}Museos más comentados{% endblock %}
+{% block subtitle_1 %}<b>Museos más comentados</b>{% endblock %}
 
 {% block content_2 %}
-	<div>	    
+	<div class="Next_Button">	    
+		<form action="" method="POST">
+  			<input type="submit" value="Next" name="Next">
+		</form> 		
+	</div>
+
+	<div class="Accesibles_Button">	    
+		<form action="" method="POST">
+  			<input type="submit" value="Accesibles" name="Accesibles">
+		</form> 		
+	</div>
+
+	<div class="Todos_Button">	    
 		<form action="" method="POST">
   			<input type="submit" value="Todos" name="Todos">
 		</form> 		
 	</div>
+	
+	
+	<img id="Debod" src="https://www.viajejet.com/wp-content/viajes/vista-nocturna-del-templo-de-debod.jpg" />
 
-	<div>	    
-		<form action="" method="POST">
-  			<input type="submit" value="Cargar" name="Cargar">   
-		</form> 		
-	</div>	
+	<div class="Otros_Usuarios">    	
+		<h3><b>Otros usuarios</b></h3>
+	</div>
 
-	<div>    	
-		<h3>Museos preferidos por otros usuarios</h3>
+	<div class="Contenido_Usuarios">
 		<p>Rellenar</p>
 	</div>
 {% endblock %}
-
-
-       
-    
-
