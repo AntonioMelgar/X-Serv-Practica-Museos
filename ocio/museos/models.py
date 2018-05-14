@@ -33,7 +33,7 @@ class Museo(models.Model):
 class Usuario(models.Model):
 	nombre = models.CharField(max_length=256)
 	comentario = models.CharField(max_length=20000)
-	fecha = models.DateTimeField() 
+	fecha = models.DateTimeField(auto_now_add=True) ## 
 	museo = models.ForeignKey(Museo)
 	def __str__(self):
 		return self.museo.NOMBRE + ', ' + self.comentario	

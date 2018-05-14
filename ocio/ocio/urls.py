@@ -22,10 +22,13 @@ urlpatterns = [
 	url(r'^(\d+)$', 'museos.views.mostrar_principal_next'),
 	url(r'^accesibles/(\d+)$', 'museos.views.mostrar_principal_accesibles_next'),
 	url(r'^accesibles$', 'museos.views.mostrar_principal_accesibles'),	
-	url(r'^museos/(\d+)$', 'museos.views.mostrar_app_museo'), 	
+	url(r'^museos/(\d+)$', 'museos.views.mostrar_app_museo'),
+	url(r'^root/museos/(\d+)$', 'museos.views.mostrar_app_museo'), ###	
 	url(r'^museos', 'museos.views.mostrar_museos'),
 	url(r'^about', 'museos.views.mostrar_ayuda'),
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^logout', logout), ##
+	url(r'^logout', logout), 
 	url(r'^login', login),
+	url(r'^(.+)/(\d+)', 'museos.views.mostrar_usuario_next'), ##
+	url(r'^(.+)', 'museos.views.mostrar_usuario'), ##
 ]

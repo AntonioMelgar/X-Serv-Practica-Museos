@@ -133,7 +133,7 @@ def mostrar_principal_next(request, numero):
 	else:
 		lista_museos = lista_museos[int(numero)*5:(int(numero)*5+5)]
 	
-
+####
 		
 	if request.method == "GET":
 		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
@@ -158,7 +158,6 @@ def mostrar_principal_next(request, numero):
 
 @csrf_exempt
 def mostrar_principal_accesibles(request):
-	print('acc')
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
@@ -196,7 +195,6 @@ def mostrar_principal_accesibles(request):
 
 @csrf_exempt
 def mostrar_principal_accesibles_next(request, numero):
-	print('acc_next')
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
@@ -260,24 +258,118 @@ def mostrar_museos(request):
 	return respuesta
 
 
-
+@csrf_exempt
 def mostrar_app_museo(request, identificador):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
 		link = 'logout'
+		mostrar_selec = True
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
 		link = 'login'
+		mostrar_selec = False
 	
 	if request.method == "GET":
 		museo = Museo.objects.get(id=int(identificador))
-		respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link}) 
+		respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec})
+	
+	elif request.method == "POST":
+		if 'About' in request.POST:
+   			respuesta = HttpResponse('agregar ayuda')
+		elif 'Añadir a lista' in request.POST:
+			museo = Museo.objects.get(id=int(identificador))
+			museos_usuario = Usuario.objects.filter(nombre=request.user.username)
+			if len(museos_usuario.filter(museo=museo)) == 0:
+				g = Usuario(nombre = request.user.username, comentario = "", museo = museo)	
+				g.save()
+			respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec})
+	
+	return respuesta
+ 
+@csrf_exempt
+def mostrar_usuario(request, usuario):
+	
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+		mostrar_selec = True
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'
+		mostrar_selec = False
+	
+	museos_usuario = Usuario.objects.filter(nombre=usuario)
+	if len(museos_usuario) < 5:
+		museos_usuario = museos_usuario[0:len(museos_usuario)]
+		
+	else:
+		museos_usuario = museos_usuario[0:5]
 
-	return respuesta 
+	if request.method == "GET":
+		respuesta = render(request, 'museos/usuario.html', {'lista_museos': museos_usuario, 'logged': logged, 'link': link, 'name_link': name_link}) 
+	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Next' in request.POST: 
+			respuesta = HttpResponseRedirect(usuario +'/1')
+		elif 'Cargar' in request.POST: ######
+			crear_database()	
+			respuesta = HttpResponseRedirect('/')
+
+	return respuesta
 
 
+
+@csrf_exempt
+def mostrar_usuario_next(request, usuario, numero):
+	
+	if request.user.is_authenticated():
+		logged = 'Logged in as ' + request.user.username + '.'
+		name_link = 'Logout'
+		link = 'logout'
+		mostrar_selec = True
+	else:
+		logged = 'Not logged in.'
+		name_link = 'Login'
+		link = 'login'
+		mostrar_selec = False
+	
+	museos_usuario = Usuario.objects.filter(nombre=usuario)
+	volver = False
+	if len(museos_usuario) <= 5:
+		museos_usuario = museos_usuario[0:len(museos_usuario)]
+		volver = True	
+	elif len(museos_usuario) - int(numero)*5 < 5:
+		museos_usuario = museos_usuario[int(numero)*5:len(museos_usuario)]
+		volver = True
+	else:
+		museos_usuario = museos_usuario[int(numero)*5:(int(numero)*5+5)]
+
+	if request.method == "GET":
+		respuesta = render(request, 'museos/usuario.html', {'lista_museos': museos_usuario, 'logged': logged, 'link': link, 'name_link': name_link}) 
+	
+	elif request.method == "POST":
+		if 'Todos' in request.POST:
+   			respuesta = HttpResponseRedirect('/museos')
+		elif 'About' in request.POST:
+			respuesta = HttpResponseRedirect('/about')
+		elif 'Next' in request.POST:
+			if volver:
+				respuesta = HttpResponseRedirect('/' + usuario)
+			else: 
+				respuesta = HttpResponseRedirect('/' + usuario + '/' + str(int(numero)+1))
+		elif 'Cargar' in request.POST: ######
+			crear_database()	
+			respuesta = HttpResponseRedirect('/')
+
+	return respuesta
 
 def mostrar_ayuda(request):
 	respuesta = HttpResponse('Aqui mostramos la ayuda')
