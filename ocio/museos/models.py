@@ -36,6 +36,11 @@ class Usuario(models.Model):
 	fecha = models.DateTimeField(auto_now_add=True) ## 
 	museo = models.ForeignKey(Museo)
 	def __str__(self):
-		return self.museo.NOMBRE + ', ' + self.comentario	
+		return self.museo.NOMBRE + ', ' + self.comentario
 
+class Comentario(models.Model):
+	text = models.TextField()
+	museo = models.ForeignKey(Museo)	
+	def __str__(self):
+		return self.museo.NOMBRE
 

@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Museo, Usuario
+from .models import Museo, Usuario, Comentario
 from lxml import etree
 
 # Create your views here.
@@ -80,11 +80,11 @@ def mostrar_principal(request):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'	
+		link = '/login'	
 	
 	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").order_by('-NUMERO_COMENTARIOS')
 	if len(lista_museos) < 5:
@@ -92,9 +92,26 @@ def mostrar_principal(request):
 		
 	else:
 		lista_museos = lista_museos[0:5]
-	
+
+	cuatro = False
+	tres = False
+	dos = False
+	uno = False
+	cero = False
+	#Un tricky para cuadrar dimensiones de la interfaz
+	if len(lista_museos) == 0:
+		cero = True
+	elif len(lista_museos) == 1:
+		uno = True
+	elif len(lista_museos) == 2:
+		dos = True
+	elif len(lista_museos) == 3:
+		tres = True
+	elif len(lista_museos) == 4:
+		cuatro = True
+
 	if request.method == "GET":
-		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link, 'cero': cero, 'uno': uno, 'dos': dos, 'tres': tres, 'cuatro': cuatro})
 	
 	elif request.method == "POST":
 		if 'Todos' in request.POST:
@@ -117,11 +134,11 @@ def mostrar_principal_next(request, numero):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'	
+		link = '/login'	
 	
 	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").order_by('-NUMERO_COMENTARIOS')
 	volver = False
@@ -133,10 +150,25 @@ def mostrar_principal_next(request, numero):
 	else:
 		lista_museos = lista_museos[int(numero)*5:(int(numero)*5+5)]
 	
-####
-		
+	cuatro = False
+	tres = False
+	dos = False
+	uno = False
+	cero = False
+	#Un tricky para cuadrar dimensiones de la interfaz
+	if len(lista_museos) == 0:
+		cero = True
+	elif len(lista_museos) == 1:
+		uno = True
+	elif len(lista_museos) == 2:
+		dos = True
+	elif len(lista_museos) == 3:
+		tres = True
+	elif len(lista_museos) == 4:
+		cuatro = True
+	
 	if request.method == "GET":
-		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link, 'cero': cero, 'uno': uno, 'dos': dos, 'tres': tres, 'cuatro': cuatro})
 	
 	elif request.method == "POST":
 		if 'Todos' in request.POST:
@@ -161,11 +193,11 @@ def mostrar_principal_accesibles(request):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'		
+		link = '/login'		
 
 	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").filter(ACCESIBILIDAD = '1').order_by('-NUMERO_COMENTARIOS')
 	if len(lista_museos) < 5:
@@ -174,8 +206,25 @@ def mostrar_principal_accesibles(request):
 	else:
 		lista_museos = lista_museos[0:5] 
 	
+	cuatro = False
+	tres = False
+	dos = False
+	uno = False
+	cero = False
+	#Un tricky para cuadrar dimensiones de la interfaz
+	if len(lista_museos) == 0:
+		cero = True
+	elif len(lista_museos) == 1:
+		uno = True
+	elif len(lista_museos) == 2:
+		dos = True
+	elif len(lista_museos) == 3:
+		tres = True
+	elif len(lista_museos) == 4:
+		cuatro = True
+	
 	if request.method == "GET":
-		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link, 'cero': cero, 'uno': uno, 'dos': dos, 'tres': tres, 'cuatro': cuatro})
 	
 	elif request.method == "POST":
 		if 'Todos' in request.POST:
@@ -185,7 +234,7 @@ def mostrar_principal_accesibles(request):
 		elif 'Accesibles' in request.POST:
 			respuesta = HttpResponseRedirect('/')
 		elif 'Next' in request.POST: 
-			respuesta = HttpResponseRedirect('accesibles/1')
+			respuesta = HttpResponseRedirect('/accesibles/1')
 		elif 'Cargar' in request.POST: ######
 			crear_database()	
 			respuesta = HttpResponseRedirect('/')
@@ -198,11 +247,11 @@ def mostrar_principal_accesibles_next(request, numero):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'		
+		link = '/login'		
 
 	lista_museos = Museo.objects.exclude(NUMERO_COMENTARIOS__in="0").filter(ACCESIBILIDAD = '1').order_by('-NUMERO_COMENTARIOS')
 	volver = False
@@ -213,9 +262,26 @@ def mostrar_principal_accesibles_next(request, numero):
 		volver = True
 	else:
 		lista_museos = lista_museos[int(numero)*5:(int(numero)*5+5)]
+
+	cuatro = False
+	tres = False
+	dos = False
+	uno = False
+	cero = False
+	#Un tricky para cuadrar dimensiones de la interfaz
+	if len(lista_museos) == 0:
+		cero = True
+	elif len(lista_museos) == 1:
+		uno = True
+	elif len(lista_museos) == 2:
+		dos = True
+	elif len(lista_museos) == 3:
+		tres = True
+	elif len(lista_museos) == 4:
+		cuatro = True
 	
 	if request.method == "GET":
-		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link})
+		respuesta = render(request, 'museos/index.html', {'lista_museos': lista_museos, 'logged': logged, 'link': link, 'name_link': name_link, 'cero': cero, 'uno': uno, 'dos': dos, 'tres': tres, 'cuatro': cuatro})
 	
 	elif request.method == "POST":
 		if 'Todos' in request.POST:
@@ -228,7 +294,7 @@ def mostrar_principal_accesibles_next(request, numero):
 			if volver:
 				respuesta = HttpResponseRedirect('/accesibles')
 			else: 
-				respuesta = HttpResponseRedirect('accesibles/' + str(int(numero)+1))
+				respuesta = HttpResponseRedirect('/accesibles/' + str(int(numero)+1))
 		elif 'Cargar' in request.POST: ######
 			crear_database()	
 			respuesta = HttpResponseRedirect('/')
@@ -241,11 +307,11 @@ def mostrar_museos(request):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'
+		link = '/login'
 	
 	if request.method == "GET":
 		lista_museos = Museo.objects.all()
@@ -263,29 +329,43 @@ def mostrar_app_museo(request, identificador):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 		mostrar_selec = True
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'
+		link = '/login'
 		mostrar_selec = False
-	
+		
+	museo = Museo.objects.get(id=int(identificador))
+	comentarios = Comentario.objects.filter(museo=museo)
+	lista_vacia = False
+	print(len(comentarios))	
+	if len(comentarios) == 0:
+		lista_vacia  = True
+ 		
 	if request.method == "GET":
-		museo = Museo.objects.get(id=int(identificador))
-		respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec})
+		respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec, 'comentarios': comentarios, 'lista_vacia' : lista_vacia })
 	
 	elif request.method == "POST":
 		if 'About' in request.POST:
    			respuesta = HttpResponse('agregar ayuda')
 		elif 'Añadir a lista' in request.POST:
-			museo = Museo.objects.get(id=int(identificador))
 			museos_usuario = Usuario.objects.filter(nombre=request.user.username)
 			if len(museos_usuario.filter(museo=museo)) == 0:
 				g = Usuario(nombre = request.user.username, comentario = "", museo = museo)	
 				g.save()
-			respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec})
-	
+			respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec, 'comentarios': comentarios, 'lista_vacia' : lista_vacia })
+
+		elif 'Enviar' in request.POST:
+			coment = request.POST['Comentario']
+			if coment != "":
+				g = Comentario(text = request.POST['Comentario'], museo = museo)	
+				g.save()
+				comentarios = Comentario.objects.filter(museo=museo) 
+				museo.NUMERO_COMENTARIOS = museo.NUMERO_COMENTARIOS + 1
+				museo.save()		
+			respuesta = render(request, 'museos/museos_app.html', {'museo': museo, 'logged': logged, 'link': link, 'name_link': name_link, 'mostrar_selec': mostrar_selec, 'comentarios': comentarios, 'lista_vacia' : lista_vacia })	
 	return respuesta
  
 @csrf_exempt
@@ -294,12 +374,12 @@ def mostrar_usuario(request, usuario):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 		mostrar_selec = True
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'
+		link = '/login'
 		mostrar_selec = False
 	
 	museos_usuario = Usuario.objects.filter(nombre=usuario)
@@ -318,7 +398,7 @@ def mostrar_usuario(request, usuario):
 		elif 'About' in request.POST:
 			respuesta = HttpResponseRedirect('/about')
 		elif 'Next' in request.POST: 
-			respuesta = HttpResponseRedirect(usuario +'/1')
+			respuesta = HttpResponseRedirect('/' + usuario +'/1')
 		elif 'Cargar' in request.POST: ######
 			crear_database()	
 			respuesta = HttpResponseRedirect('/')
@@ -333,12 +413,12 @@ def mostrar_usuario_next(request, usuario, numero):
 	if request.user.is_authenticated():
 		logged = 'Logged in as ' + request.user.username + '.'
 		name_link = 'Logout'
-		link = 'logout'
+		link = '/logout'
 		mostrar_selec = True
 	else:
 		logged = 'Not logged in.'
 		name_link = 'Login'
-		link = 'login'
+		link = '/login'
 		mostrar_selec = False
 	
 	museos_usuario = Usuario.objects.filter(nombre=usuario)
