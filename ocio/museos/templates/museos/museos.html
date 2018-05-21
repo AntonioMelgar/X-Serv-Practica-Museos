@@ -1,0 +1,59 @@
+{% extends "museos/base.html" %}
+
+{% block title %}Museos Madrid{% endblock %}
+
+{% block subtitle_1 %}<b>Museos</b>{% endblock %}
+
+{% block content_1 %}
+
+	<div class="Filtrar_Distrito">		
+		<form action="" method="POST">
+  			<p><b>Filtrar por Distrito:</b></p>
+  			<input type="text" name="Distrito" value=""><br>
+  			<input type="submit" value="Enviar" name="Enviar">
+		</form> 				
+	</div>
+
+{% endblock %}
+
+{% block content_4 %}
+	<div class="nombre">
+		<h4><br><b>{{museo.NOMBRE}}</b></br></h4>
+	</div>
+
+	<div class="info">
+		<h7><a href=museos/{{museo.id}}>Más información</a></h7>		
+	</div>
+{% endblock %}
+
+{% if mostrar %}
+	{% block imagenes %}
+		<img id="Prado" src="http://www.telemadrid.es/sites/default/files/Images2016/museo-prado-interior-uno.jpg" />
+		<img id="Ferrocarril" src="https://www.pequeviajes.com/wp-content/uploads/2016/05/museo-del-ferrocarril-2.jpg" />
+		<img id="Guernica" src="http://img2.rtve.es/v/4000139?w=1600&preview=1493496900371.JPG" />
+		<img id="Lechera" src="https://i.pinimg.com/originals/dd/d6/9d/ddd69dc6c13a09e40ff1fd58fd7f27f6.gif" />
+		<img id="Dinosaurio" src="https://78.media.tumblr.com/ff31027aba367f52568605fbe427c626/tumblr_olxku5y1IE1sv4558o1_500.gif" />
+		<img id="Encadenado" src="http://img2.rtve.es/v/2330147?w=1600&preview=1390233764258.gif" />
+		<img id="Gioconda" src="https://78.media.tumblr.com/6cf1af011e7e1a6c56efba29e250534b/tumblr_o8eywyXXwB1ub1f96o1_400.gif" />
+		<img id="Prado_Exterior" src="https://www.hrc-hotel.com/files/0db_Museo_del_Prado.png" />
+		<img id="Ventana" src="https://blocdejavier.files.wordpress.com/2012/05/dali-muchacha-en-la-ventana-1925.jpg" />
+		<img id="Reina_Sofia" src="https://s6.eestatic.com/2016/09/22/reportajes/grandes-historias/Museo_Reina_Sofia-Ministerio_de_Cultura-Madrid-Grandes_Historias_157495601_17065452_1706x960.jpg" />	
+	{% endblock %}
+{% endif %}
+
+{% block Inicio %}
+		<div class="Cargar_Button">	    
+			<form action="" method="POST">
+  				<input type="submit" value="Inicio" name="Inicio">   
+			</form> 		
+		</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+

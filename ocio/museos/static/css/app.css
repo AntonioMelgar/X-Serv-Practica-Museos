@@ -1,0 +1,58 @@
+.page-header {
+	background-color: #9E4528;
+    margin-top: 0;
+    padding: 40px 40px 40px 60px;
+	text-align: center;
+	font-family: 'Pangolin';
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+	color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.titulo {
+	font-family: 'Pangolin';
+	color: #9E4528;
+	text-align: center;
+	
+}
+
+.datos {
+	font-family: 'Indie Flower';
+	margin-left: 20px;
+	color: #000000;
+}
+
+.subtitulos {
+	font-family: 'Pangolin';
+	color: #BF6141;;
+	margin-left: 40px;
+}
+
+.info {
+	font-family: 'Pangolin';
+	color: #BF6141;;
+	margin-left: 20px;
+}
+
+.comentario {
+	font-family: 'Indie Flower';
+	margin-left: 30px;
+	color: #000000;
+}
+
+.log {
+	margin-left: 1050px;
+}
+
+#Img{
+  width: 1285px;
+  height: 160px;
+  border: none;
+  margin-left: 0px;
+  margin-top: -21px;		
+}
+
+

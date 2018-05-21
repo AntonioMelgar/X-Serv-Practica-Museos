@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<html>
+	<head>
+    	<title>MuseosMadrid</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/app.css' %}">
+		<link rel="stylesheet" href="{% static 'css/app_2.css' %}">
+		<link rel="stylesheet" href="{% static 'css/pie_pagina.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Pangolin&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="https://fonts.google.com/specimen/Pangolin?selection.family=Pangolin" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower&subset=latin,latin-ext" rel="stylesheet" type="text/css">	
+	</head>
+	<body>
+		
+		<div class="page-header">		
+			<h1>Museos Madrid</h1>				
+		</div>
+
+		<img id="Img" src="https://img.blogs.es/bloglenovo/wp-content/uploads/2017/11/arte-instagram.jpg" />		
+		
+		<div class="log">		
+			<h5>
+				<p>{{logged}} <a href={{link}}?next=/>{{name_link}}</a></p>
+			</h5>				
+		</div>
+				
+		<div class="titulo">	
+			<h1><p><b>{{museo.NOMBRE}}</b></p></h1>				
+		</div>
+	
+		<div class="datos">		
+			<h4>
+				<p>{{museo.DESCRIPCION_ENTIDAD}}</p>
+			</h4>				
+		</div>
+
+		<div class="info">
+			<h4><br><b> Información de: </b> {{museo.NOMBRE}}</br></h4>
+		</div>
+
+		<div class="subtitulos">
+			    	
+					<div class="datos">					
+						<h5><p>(Información actualizada en 2018)<p></h5>
+					</div>
+
+					<h7><b>Dirección:</b><br></h7>
+					<div class="datos">
+						<h4>{{museo.CLASE_VIAL}} {{museo.NOMBRE_VIA}}, {{museo.NUM}}. cp: {{museo.CODIGO_POSTAL}}<br></h4>
+						<h4>{{museo.BARRIO}}, {{museo.DISTRITO}}. {{museo.LOCALIDAD}}</h4>
+					</div>
+					
+					<h7><br><b>Cómo llegar:</b></br></h7>
+					<div class="datos">
+						<h4>{{museo.TRANSPORTE}}</h4>
+					</div>
+
+					<h7><br><b>Contacto con {{museo.NOMBRE}}:</b></br></h7>
+					<div class="datos">
+						<h4>-Teléfono: {{museo.TELEFONO}}</h4>
+						<h4>-Email: {{museo.EMAIL}}</h4>
+						<h4>-Fax: {{museo.FAX}}</h4>
+					</div>
+
+					<h7><br><b>Horario de visitas:</b></br></h7>
+					<div class="datos">					
+						<h4>{{museo.HORARIO}}</h4>
+					</div>
+					
+					<h7><br><b>Equipamiento:</b></br></h7>				
+					<div class="datos">		   			
+						<h4><p>{{museo.EQUIPAMIENTO}}</p></h4>
+					</div>				
+				
+					<h4><br><b>Lista de comentarios: </b></br></h4>
+					<div class="datos">
+						{% for comentario in comentarios %}
+							<h7><b>Anónimo: </b><br> {{comentario.text}}<br><br></h7>
+						{% endfor %}
+						{% if mostrar_selec %}						
+							{% if lista_vacia %}
+								<h6>¡¡ Puedes ser el primero en comentar !!</h6>
+							{% endif %}
+						{% endif %}
+					</div>
+					
+		</div>
+		
+			{% if mostrar_selec %}
+						<div class="comentario">	    
+							<form action="" method="POST">
+								<textarea class="Comentario" cols="40" id="id_text" name="Comentario" rows="10" style="width: 352px; height: 130px;" placeholder="escribe aquí tu comentario" ></textarea><br>
+								<div class="enviar_comentario">
+  									<input type="submit" value="Enviar" name="Enviar">
+								</div>
+							</form>
+							<div class="add_lista">
+								<form action="" method="POST">
+  									<input type="submit" value="Añadir a lista" name="Añadir a lista">
+								</form>
+							</div>		
+						</div>		
+			{% endif %}
+
+			<div class="inicio_2">
+				<form action="" method="POST">
+  					<input type="submit" value="Inicio" name="Inicio">
+				</form> 
+			</div>
+
+			<div class="todos_2">
+				<form action="" method="POST">
+  					<input type="submit" value="Todos" name="Todos">
+				</form> 
+			</div>
+
+			<div class="about_2">
+				<form action="" method="POST">
+  					<input type="submit" value="About" name="About">
+				</form> 
+			</div>
+
+			<div class="pie">	
+				<h7>© Servicios y Aplicaciones en Redes de Ordenadores | Esta aplicación utiliza datos del <a href="https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=118f2fdbecc63410VgnVCM1000000b205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default">portal de datos abiertos</a> de la ciudad de Madrid</h7>
+			</div>
+	</body>
+</html>

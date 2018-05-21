@@ -1,0 +1,47 @@
+.page-header {
+	background-color: #9E4528;
+    margin-top: 0;
+    padding: 40px 40px 40px 60px;
+	text-align: center;
+	font-family: 'Pangolin';
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+	color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+#Img{
+  width: 1285px;
+  height: 120px;
+  border: none;
+  margin-left: 0px;
+  margin-top: -21px;		
+}
+
+.titulo {
+	margin-left: 20px;
+	color: #000000;
+}
+
+.info {
+	margin-left: 40px;
+	color: #000000;
+}
+
+.inicio_2 {
+	margin-left: 20px;
+	color: #000000;
+}
+
+.todos_2 {
+	margin-top: -46px;
+	margin-left: 90px;
+	color: #000000;
+}
+
+.log {
+    padding: 0px 0px 0px 0px;
+	margin-left: 1050px;
+}

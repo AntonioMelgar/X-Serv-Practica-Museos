@@ -1,0 +1,191 @@
+.page-header {
+	background-color: #9E4528;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+	text-align: center;
+	font-family: 'Pangolin';
+}
+
+
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+	color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.log {
+    padding: 0px 0px 0px 0px;
+	margin-left: 1050px;
+}
+
+.titulo {
+	font-family: 'Pangolin';
+	color: #9E4528;
+	margin-left: 20px;
+	
+}
+
+.nombre {
+	font-family: 'Pangolin';
+	margin-left: 20px;
+	color: #BF6141;
+}
+
+.Filtrar_Distrito {
+	margin-left: 20px;
+	color: #BF6141;
+}
+
+.info {
+	margin-left: 20;
+	color: #DB714D;
+}
+
+h7 a{
+  color: #DB714D;
+}
+
+h4 a{
+  color: #BF6141;
+}
+
+.datos {
+	margin-left: 45px; 	
+}
+
+.Next_Button {
+	margin-left: 45px;
+	margin-top: 10px;
+	color: #BF6141;
+}
+
+.nombre_pagina{
+	background-color: #9E4528;
+	margin-left: 100px;    
+	margin-top: 0;
+    
+}
+
+.Accesibles_Button {
+	margin-left: 115px;
+	margin-top: -46px;
+	color: #BF6141;
+}
+
+.Todos_Button {
+	margin-left: 225px;
+	margin-top: -46px;
+	color:#BF6141;
+}
+
+.Cargar_Button {
+	margin-top: 20px;
+	margin-left: 20px;
+	color: #BF6141;
+}
+
+.About {
+	margin-top:-46px;
+	color: #BF6141;
+	margin-left: 110px;
+}
+
+.Otros_Usuarios {
+	margin-right: 0;
+	margin-left: 515px;
+	margin-top: -25px;
+	color: #9E4528;
+	font-family: 'Pangolin';
+}
+
+.Contenido_Usuarios {
+	margin-right: 20;
+	margin-left: 515px;	
+}
+
+#debod {
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -577px;			
+}
+
+
+#Prado{
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -5450px;		
+}
+
+#Ferrocarril{
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -4650px;		
+}
+
+#Guernica{
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -3980px;		
+}
+
+#Lechera{
+  width: 670px;
+  height: 420px;
+  border: none;
+  margin-left: 550px;
+  margin-top: -3330px;		
+}
+
+#Dinosaurio{
+  border: none;
+  margin-left: 700px;
+  margin-top: -2800px;		
+}
+
+#Gioconda{
+  border: none;
+  margin-left: 750px;
+  margin-top: -1815px;		
+}
+
+#Encadenado{
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -2400px;		
+}
+
+#Ventana{
+  width: 750px;
+  height: 500px;
+  border: none;
+  margin-left: 515px;
+  margin-top: -1000px;		
+}
+
+#Prado_Exterior{
+  width: 550px;
+  height: 300px;
+  border: none;
+  margin-left: 620px;
+  margin-top: -1410px;		
+}
+
+#Reina_Sofia{
+  width: 650px;
+  height: 400px;
+  border: none;
+  margin-left: 575px;
+  margin-top: -425px;		
+}
+

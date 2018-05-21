@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<Contenidos>
+		<usuario>Canal XML de {{nombre_usuario}}</usuario>
+		{% for museo in lista_museos %}
+		<contenido>
+			<atributos idioma="es">
+            	<atributo nombre="ID-ENTIDAD">{{museo.museo.ID_ENTIDAD}}</atributo>
+            	<atributo nombre="NOMBRE">{{museo.museo.NOMBRE}}</atributo>
+            	<atributo nombre="DESCRIPCION-ENTIDAD"><![CDATA[{{museo.museo.DESCRIPCION_ENTIDAD}}]]></atributo>
+            	<atributo nombre="HORARIO"><![CDATA[{{museo.museo.HORARIO}}]]></atributo>
+            	<atributo nombre="TRANSPORTE"><![CDATA[{{museo.museo.TRANSPORTE}}]]></atributo>
+            	<atributo nombre="ACCESIBILIDAD">{{museo.museo.ACCESIBILIDAD}}</atributo>
+            	<atributo nombre="CONTENT-URL">{{museo.museo.CONTENT_URL}}</atributo>
+            	<atributo nombre="LOCALIZACION">
+            	    <atributo nombre="NOMBRE-VIA">{{museo.museo.NOMBRE_VIA}}</atributo>
+            	    <atributo nombre="CLASE-VIAL">{{museo.museo.CLASE_VIAL}}</atributo>
+            	    <atributo nombre="LOCALIDAD">{{museo.museo.LOCALIDAD}}</atributo>
+            	    <atributo nombre="PROVINCIA">{{museo.museo.PROVINCIA}}</atributo>
+            	    <atributo nombre="CODIGO-POSTAL">{{museo.museo.CODIGO_POSTAL}}</atributo>
+            	    <atributo nombre="DISTRITO">{{museo.museo.DISTRITO}}</atributo>
+            	</atributo>
+            	<atributo nombre="DATOSCONTACTOS">
+            	    <atributo nombre="TELEFONO">{{museo.museo.TELEFONO}}</atributo>
+            	</atributo>
+        	</atributos>
+		</contenido>
+		{% endfor %}	
+	</Contenidos>
+	

@@ -1,0 +1,106 @@
+{% load staticfiles %}
+
+<head>
+    <title>MuseosMadrid</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{% static 'css/museos.css' %}">
+	<link rel="stylesheet" href="{% static 'css/usuario.css' %}">
+	<link rel="stylesheet" href="{% static 'css/usuario_2.css' %}">
+	<link rel="stylesheet" href="{% static 'css/pie_pagina.css' %}">			
+	<link href="https://fonts.googleapis.com/css?family=Pangolin&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+	<link href="https://fonts.google.com/specimen/Pangolin?selection.family=Pangolin" rel="stylesheet" type="text/css">
+</head>
+
+<body style="background-color: {{color_cuerpo}};">
+
+		<div class="page-header" style="background-color: {{color_cabecera}};">		
+			<h1>{{nombre_pagina}}</h1>				
+		</div>
+		
+		<img id="Img" src="https://www.osi.es/sites/default/files/images/imagen-decorativa-infografia-cuentas-usuario.png" />
+		
+		<div class="log">		
+			<h5>
+				<p>{{logged}} <a href={{link}}?next=/>{{name_link}}</a></p>
+			</h5>				
+		</div>		
+
+		<div class="lista_user">
+			<h3>¡¡ Lista de museos !!</h3>
+		</div>
+
+		{% for museo in lista_museos %}
+		<div class="nombre">
+			<h4><a href={{museo.museo.CONTENT_URL}}>{{museo.museo.NOMBRE}}</a></h4>
+		</div>
+
+		<div class="datos">	
+			<h7><b>Dirección:</b> {{museo.museo.CLASE_VIAL}} {{museo.museo.NOMBRE_VIA}}, {{museo.museo.NUM}}. cp: {{museo.museo.CODIGO_POSTAL}}<br></h7>
+			<h7>{{museo.museo.BARRIO}}, {{museo.museo.DISTRITO}}. {{museo.museo.LOCALIDAD}}</h7>
+			<h7><br>Fecha en la que fue seleccionado: {{museo.fecha}}</br></h7>
+			<h7><br><a href=museos/{{museo.museo.id}}>Más información</a></br></h7>
+		</div>
+		{% endfor %}
+		
+		<div class="Next_Button">	    
+			<form action="" method="POST">
+  				<input type="submit" value="Next" name="Next">
+			</form> 		
+		</div>
+
+		{% if mostrar_selec %}
+			<div class="lista_user">
+				<h3>¡¡ Personaliza tu página !!</h3>
+			</div>
+
+			<div class="nombre_pagina">		
+				<form action="" method="POST">
+  					<p><b>Modifica el nombre de tu página: </b></p>
+  					<input type="text" name="Pagina" value=""><br>
+  					<input type="submit" value="Modificar", name="Modificar">
+				</form> 				
+			</div>
+			
+			<div class="color_cuerpo_pagina">		
+				<form action="" method="POST">
+  					<p><b>Modifica el color del cuerpo: </b></p>
+					<p><h7>(Blanco, Amarillo, Verde, Rojo, Azul, Naranja, Marron, Morado, Rosa, Gris)</h7></p>
+  					<input type="text" name="color_cuerpo_texto" value=""><br>
+  					<input type="submit" value="Modificar", name="color_cuerpo_boton">
+				</form> 				
+			</div>
+
+			<div class="color_cabecera_pagina">		
+				<form action="" method="POST">
+  					<p><b>Modifica el color de la cabecera: </b></p>
+					<p><h7>(Blanco, Amarillo, Verde, Rojo, Azul, Naranja, Marron, Morado, Rosa, Gris)</h7></p>
+  					<input type="text" name="color_cabecera_texto" value=""><br>
+  					<input type="submit" value="Modificar", name="color_cabecera_boton">
+				</form> 				
+			</div>
+		{% endif %}
+
+			<div class="inicio_3">
+				<form action="" method="POST">
+  					<input type="submit" value="Inicio" name="Inicio">
+				</form> 
+			</div>
+
+			<div class="todos_3">
+				<form action="" method="POST">
+  					<input type="submit" value="Todos" name="Todos">
+				</form> 
+			</div>
+
+			<div class="about_3">
+				<form action="" method="POST">
+  					<input type="submit" value="About" name="About">
+				</form> 
+			</div>
+
+			<div class="pie">	
+				<h7>© Servicios y Aplicaciones en Redes de Ordenadores | Esta aplicación utiliza datos del <a href="https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=118f2fdbecc63410VgnVCM1000000b205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default">portal de datos abiertos</a> de la ciudad de Madrid</h7>
+			</div>			
+	
+</body>		

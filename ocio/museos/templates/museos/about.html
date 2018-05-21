@@ -1,0 +1,105 @@
+{% load staticfiles %}
+<html>
+	<head>
+    	<title>MuseosMadrid</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/about.css' %}">
+		<link rel="stylesheet" href="{% static 'css/pie_pagina.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Pangolin&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="https://fonts.google.com/specimen/Pangolin?selection.family=Pangolin" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower&subset=latin,latin-ext" rel="stylesheet" type="text/css">	
+	</head>
+	<body>
+		
+		<div class="page-header">		
+			<h1>Ayuda</h1>				
+		</div>
+
+		<img id="Img" src="https://www.ealde.es/wp-content/uploads/2017/05/direccion-de-proyectos-dudas.jpg" />		
+		
+		<div class="log">		
+			<h5>
+				<p>{{logged}} <a href={{link}}?next=/>{{name_link}}</a></p>
+			</h5>				
+		</div>
+
+		<div class="titulo">
+			<h5>Inicio (/): </h5>	
+		</div>
+	
+		<div class="info">
+			<p><h7>Dos bloques: Museos más comentados y otros usuarios.</h7></p>
+			<p><h7>Museos más comentados. Muestra museos de 5 en 5 (next para pasar a la siguiente "tanda").</h7></p>
+			<p><h7>Otros usuarios. Muestra los enlaces a las páginas de otros usuarios registrados. </h7></p>	
+		</div>
+
+		<div class="titulo">
+			<h5>Todos (/museos): </h5>	
+		</div>
+
+		<div class="info">
+			<p><h7>Muestra todos los museos disponibles en la base de datos. A demás, podemos filtrarlos por distrito.</h7></p>	
+		</div>
+	
+		<div class="titulo">
+			<h5>App de los museos (/museos/id): </h5>	
+		</div>
+
+		<div class="info">
+			<p><h7>Muestra información detallada de los museos.</h7></p>
+			<p><h7>A demás, cualquiera podrá visualizar todos los comentarios dedicados a dicho museo.</h7></p>
+			<p><h7>Si estás registrado, podras añadir el museo a tu lista de museos (visible en la página del usuario registrado) y contribuir escribiendo comentarios sobre dicho museo.</h7></p>	
+		</div>
+
+		<div class="titulo">
+			<h5>Página de usuario (/usuario): </h5>	
+		</div>
+
+		<div class="info">
+			<p><h7>Es la página personal de un determinado usuario.</h7></p>
+			<p><h7>Visible para todo el público. Si eres su propietario, podrás cambiar el título de la página, el color de fondo y añadir tantos museos como guste.</h7></p>
+			<p><h7>Las páginas de usuarios registrados son creadas al añadir un museo a tu lista por primera vez.</h7></p>
+		</div>
+
+		<div class="titulo">
+			<h5>Canal XML (/usuario/xml): </h5>	
+		</div>
+
+		<div class="info">
+			<p><h7>Canal XML de la lista de museos de una determinada página de usuario.</h7></p>
+			
+		</div>
+		
+		<div class="titulo">
+			<h5>Otros datos de interés: </h5>	
+		</div>
+
+		<div class="info">
+			<p><h7>Al final de cada página HTML podremos acceder a la página principal, todos los museos o ayuda sin más que hacer click en sus respectivos botones (Inicio, Todos, About).</h7></p>
+			<p><h7>Si no hay museos cargados, deberás dar al botón "Cargar" en la página principal para cargarlos en la base de datos.</h7></p>			
+		</div>
+
+		<br>
+		<div class="titulo">
+			<h5>Autor: Antonio Melgar González. 20/5/2018.</h5>	
+		</div>
+
+		<div class="inicio_2">
+			<form action="" method="POST">
+  					<input type="submit" value="Inicio" name="Inicio">
+			</form> 
+		</div>
+
+		<div class="todos_2">
+			<form action="" method="POST">
+  				<input type="submit" value="Todos" name="Todos">
+			</form> 
+		</div>
+
+		<div class="pie">	
+			<h7>© Servicios y Aplicaciones en Redes de Ordenadores | Esta aplicación utiliza datos del <a href="https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=118f2fdbecc63410VgnVCM1000000b205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default">portal de datos abiertos</a> de la ciudad de Madrid</h7>
+		</div>
+
+	</body>
+</html>

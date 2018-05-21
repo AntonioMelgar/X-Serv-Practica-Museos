@@ -1,0 +1,35 @@
+.nombre_pagina{
+	margin-left: 40px;    
+	margin-top: 0;
+	color: #BF6141;
+    background-color: transparent;
+}
+
+.color_cuerpo_pagina{
+	margin-left: 40px;    
+	margin-top: 0;
+	color: #BF6141;
+    
+}
+
+.color_cabecera_pagina{
+	margin-left: 40px;    
+	margin-top: ;
+	color: #BF6141;
+    
+}
+
+#Img{
+  width: 1292px;
+  height: 95px;
+  border: none;
+  margin-left: -7px;
+  margin-top: -21px;		
+}
+
+.lista_user {
+	font-family: 'Pangolin';
+	color: #9E4528;
+	margin-left: 20px;
+	
+}

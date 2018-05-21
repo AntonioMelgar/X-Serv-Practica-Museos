@@ -1,0 +1,74 @@
+{% load staticfiles %}
+
+<html>
+	<head>
+    	<title>MuseosMadrid</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="{% static 'css/museos.css' %}">
+		<link rel="stylesheet" href="{% static 'css/pie_pagina.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Pangolin&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="https://fonts.google.com/specimen/Pangolin?selection.family=Pangolin" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		
+			
+		<div class="page-header">		
+			<h1>{% block title %}{% endblock %}</h1>				
+		</div>
+		
+		
+	
+		<div class="log">		
+			<h5>
+				<p>{{logged}} <a href={{link}}?next=/>{{name_link}}</a></p>
+			</h5>				
+		</div>		
+	
+		{% block content_1 %}{% endblock %}		
+		
+		<div class="titulo">    	
+			<h3>{% block subtitle_1 %}{% endblock %}</h3>
+
+		</div>
+	
+		<div>
+				{% for museo in lista_museos %}
+					{% block content_4 %}
+					<div class="nombre">
+						<h4><a href={{museo.CONTENT_URL}}>{{museo.NOMBRE}}</a></h4>
+					</div>
+					<div class="datos">	
+						<h7><b>Dirección:</b> {{museo.CLASE_VIAL}} {{museo.NOMBRE_VIA}}, {{museo.NUM}}. cp: {{museo.CODIGO_POSTAL}}<br></h7>
+						<h7>{{museo.BARRIO}}, {{museo.DISTRITO}}. {{museo.LOCALIDAD}}</h7>
+						<h7><br><a href=museos/{{museo.id}}>Más información</a></br></h7>
+					</div>
+
+					{% endblock %}
+						
+					
+				{% endfor %}				
+		</div>
+
+		{% block content_2 %}{% endblock %}
+		{% if mostrar %}
+			{% block imagenes %}{% endblock %}
+		{% endif %}
+
+		{% if mostrar_cargar %}
+			{% block cargar %}{% endblock %}
+		{% endif %}
+		
+		{% block Inicio %}{% endblock %}
+		<div class="About"> 	    
+			<form action="" method="POST">
+  				<input type="submit" value="About" name="About">
+			</form> 		
+		</div>	
+		
+		{% block espacio %}{% endblock %}
+		<div class="pie">	
+			<h7>© Servicios y Aplicaciones en Redes de Ordenadores | Esta aplicación utiliza datos del <a href="https://datos.madrid.es/portal/site/egob/menuitem.c05c1f754a33a9fbe4b2e4b284f1a5a0/?vgnextoid=118f2fdbecc63410VgnVCM1000000b205a0aRCRD&vgnextchannel=374512b9ace9f310VgnVCM100000171f5a0aRCRD&vgnextfmt=default">portal de datos abiertos</a> de la ciudad de Madrid</h7>
+		</div>
+	</body>
+</html>    
