@@ -49,6 +49,18 @@
 	</div>
 
 	<div class="Contenido_Usuarios">
-		<p>Rellenar</p>
+		{% for pagina_usuario in paginas_usuarios %}
+			<p><a href={{pagina_usuario.nombre_usuario}}>{{pagina_usuario.nombre_pagina}}</a> ({{pagina_usuario.nombre_usuario}})</p>
+		{% endfor %}
 	</div>
 {% endblock %}
+
+{% block cargar %}
+		<div class="Cargar_Button">	    
+			<form action="" method="POST">
+  				<input type="submit" value="Cargar" name="Cargar">   
+			</form> 		
+		</div>
+{% endblock %}
+
+{% block espacio %}<br>{% endblock %}

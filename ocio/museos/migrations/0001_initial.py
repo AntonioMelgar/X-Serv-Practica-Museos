@@ -11,9 +11,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Comentario',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('text', models.TextField()),
+            ],
+        ),
+        migrations.CreateModel(
             name='Museo',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('ID_ENTIDAD', models.CharField(max_length=256)),
                 ('NOMBRE', models.CharField(max_length=256)),
                 ('DESCRIPCION_ENTIDAD', models.CharField(max_length=20000)),
@@ -27,6 +34,7 @@ class Migration(migrations.Migration):
                 ('NUM', models.CharField(max_length=20000)),
                 ('LOCALIDAD', models.CharField(max_length=20000)),
                 ('CODIGO_POSTAL', models.CharField(max_length=20000)),
+                ('PLANTA', models.CharField(max_length=20000)),
                 ('BARRIO', models.CharField(max_length=20000)),
                 ('DISTRITO', models.CharField(max_length=20000)),
                 ('COORDENADA_X', models.CharField(max_length=20000)),
@@ -36,17 +44,33 @@ class Migration(migrations.Migration):
                 ('TELEFONO', models.CharField(max_length=20000)),
                 ('FAX', models.CharField(max_length=20000)),
                 ('EMAIL', models.CharField(max_length=20000)),
+                ('EQUIPAMIENTO', models.CharField(max_length=20000)),
                 ('NUMERO_COMENTARIOS', models.IntegerField()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Pagina_Personal',
+            fields=[
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
+                ('nombre_pagina', models.CharField(max_length=256)),
+                ('nombre_usuario', models.CharField(max_length=256)),
+                ('color_cuerpo', models.CharField(max_length=256)),
+                ('color_cabecera', models.CharField(max_length=256)),
             ],
         ),
         migrations.CreateModel(
             name='Usuario',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, verbose_name='ID', primary_key=True)),
                 ('nombre', models.CharField(max_length=256)),
                 ('comentario', models.CharField(max_length=20000)),
-                ('fecha', models.DateTimeField()),
+                ('fecha', models.DateTimeField(auto_now_add=True)),
                 ('museo', models.ForeignKey(to='museos.Museo')),
             ],
+        ),
+        migrations.AddField(
+            model_name='comentario',
+            name='museo',
+            field=models.ForeignKey(to='museos.Museo'),
         ),
     ]

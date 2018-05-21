@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth.views import logout, login
 
 urlpatterns = [
+	url(r'^(.+)/xml$', 'museos.views.mostrar_xml'), ##
 	url(r'^$', 'museos.views.mostrar_principal'),
 	url(r'^(\d+)$', 'museos.views.mostrar_principal_next'),
 	url(r'^accesibles/(\d+)$', 'museos.views.mostrar_principal_accesibles_next'),
@@ -30,5 +31,6 @@ urlpatterns = [
 	url(r'^logout', logout), 
 	url(r'^login', login),
 	url(r'^(.+)/(\d+)', 'museos.views.mostrar_usuario_next'), ##
-	url(r'^(.+)', 'museos.views.mostrar_usuario'), ##
+	url(r'^(.+)$', 'museos.views.mostrar_usuario') ##
+	
 ]

@@ -38,9 +38,17 @@ class Usuario(models.Model):
 	def __str__(self):
 		return self.museo.NOMBRE + ', ' + self.comentario
 
+
 class Comentario(models.Model):
 	text = models.TextField()
 	museo = models.ForeignKey(Museo)	
 	def __str__(self):
 		return self.museo.NOMBRE
 
+class Pagina_Personal(models.Model):
+	nombre_pagina = models.CharField(max_length=256)
+	nombre_usuario = models.CharField(max_length=256)
+	color_cuerpo = models.CharField(max_length=256)
+	color_cabecera = models.CharField(max_length=256)
+	def __str__(self):
+		return self.nombre_usuario
